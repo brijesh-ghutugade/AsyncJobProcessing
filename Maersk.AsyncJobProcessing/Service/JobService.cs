@@ -27,23 +27,7 @@ namespace Maersk.AsyncJobProcessing.Service
             var newJob = new Job(job);
             await _unitOfWork.JobRepository.Insert(newJob);
             await _unitOfWork.Save();
-        }
-
-        public Task<JobDto> Execute(JobDto job)
-        {
-
-            _logger.LogInformation("Processing job with ID '{JobId}'.", job.Id);
-
-            var stopwatch = Stopwatch.StartNew();
-
-            var output = job.Input.OrderBy(n => n).ToArray();
-
-            var duration = stopwatch.Elapsed;
-
-            _logger.LogInformation("Completed processing job with ID '{JobId}'. Duration: '{Duration}'.", job.Id, duration);
-
-            return Task.FromResult(new JobDto(job.Id, JobStatus.Completed, duration, job.Input, output, job.ScheduledAt));
-        }
+        }        
 
 
         public async Task<JobDto> Get(string id)

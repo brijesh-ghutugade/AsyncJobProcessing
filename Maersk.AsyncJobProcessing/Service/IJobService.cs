@@ -16,7 +16,5 @@ namespace Maersk.AsyncJobProcessing.Service
 
         Task<JobDto> Get(string id);
 
-        Task<JobDto> Execute(JobDto job);
-
     }
 }
